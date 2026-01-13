@@ -44,6 +44,60 @@ For licensing inquiries or permissions, contact:
 - **Multi-Player Competition:** Compete in like-for-like scenarios
 - **Strategic Depth:** Success depends on preparation and resource management
 - **Meta Commentary:** The game explores themes of constraint, choice, and consequence
+### 🗺️ Game Flow Architecture
+
+```mermaid
+flowchart TD
+    subgraph PlayerZone["🎮 PLAYER ZONE"]
+        Player["👤 Player"]
+        Loadout["🎯 Choose Loadout"]
+    end
+
+    subgraph VaultSystem["🔒 THE VAULT"]
+        direction TB
+        Entry["🚪 Enter Vault"]
+        Lock{{"🔐 Door Locks"}}
+        
+        subgraph Constraints["⛓️ CONSTRAINTS"]
+            Fixed["Fixed Tools Only"]
+            NoChanges["No Mid-Game Changes"]
+            TimeLimit["⏱️ Time Pressure"]
+        end
+        
+        subgraph Gameplay["🎲 GAMEPLAY"]
+            Strategy["Strategic Decisions"]
+            Resources["Resource Management"]
+            Competition["🏆 Competition"]
+        end
+        
+        Exit["🚪 Vault Exit"]
+    end
+
+    subgraph Outcomes["📊 OUTCOMES"]
+        Win["✅ Success"]
+        Lose["❌ Failure"]
+        Learn["💡 Learn & Retry"]
+    end
+
+    Player -->|Select Tools| Loadout
+    Loadout -->|Commit Choice| Entry
+    Entry --> Lock
+    Lock -->|Sealed| Constraints
+    Constraints --> Gameplay
+    Gameplay -->|Complete| Exit
+    Exit -->|Win| Win
+    Exit -->|Lose| Lose
+    Win --> Learn
+    Lose --> Learn
+    Learn -.->|New Strategy| Loadout
+
+    style PlayerZone fill:#4CAF50,color:#fff
+    style VaultSystem fill:#40C4D4,color:#000
+    style Outcomes fill:#FFF9C4,color:#000
+    style Constraints fill:#FCE4EC,color:#000
+    style Gameplay fill:#E3F2FD,color:#000
+```
+
 
 ### Project Status
 
